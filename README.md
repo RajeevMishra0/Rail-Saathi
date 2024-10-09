@@ -21,6 +21,9 @@
 - **AI Model**: Machine learning algorithms for seat suggestions
 - **Deployment**: Heroku
 
+### Python Version
+This project uses **Python 3.12.6**. Please ensure that you are using this version when setting up the project locally or when deploying it. The `runtime.txt` file in the project specifies this version for deployment on Render.
+
 ## Getting Started
 
 1. Clone the repository:
