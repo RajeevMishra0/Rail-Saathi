@@ -3,4 +3,4 @@ services:
     name: railsaathi
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app --workers 3"
+    startCommand: "gunicorn app.app:app --workers 3"

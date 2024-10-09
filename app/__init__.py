@@ -12,4 +12,4 @@ app.config.from_pyfile('../database/config.py')
 db = SQLAlchemy(app)
 csrf = CSRFProtect(app)
 
-from app import routes, auth, bookings, trains
+# You can keep any other imports here if needed, but routes are now in app.py
