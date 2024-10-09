@@ -1,3 +1,3 @@
 #!/bin/bash
 source .venv/Scripts/activate
-python app/app.py
+gunicorn app.app:app --workers 3
