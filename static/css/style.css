@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+}
+header h1 {
+    text-align: center;
+    color: #2E86C1;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
