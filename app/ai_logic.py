@@ -1,0 +1,1 @@
+# AI logic for seat suggestions
