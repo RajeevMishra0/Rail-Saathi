@@ -2,5 +2,6 @@ services:
   - type: web
     name: railsaathi
     env: python
+    pythonVersion: "3.12.6"  # Specify the desired Python version
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn app.app:app --workers 3"
