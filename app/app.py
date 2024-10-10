@@ -2,6 +2,7 @@ import os
 from flask import Flask, redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
+from flask_migrate import Migrate
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -11,12 +12,13 @@ app = Flask(__name__,template_folder=os.path.join(basedir, 'templates'), static_
 
 # If you have any database-related configurations or setups
 DATABASE_FOLDER = 'database'
-app.config.from_pyfile('../database/config.py')
+database_config_path = os.path.join(basedir, '../database/config.py')
+app.config.from_pyfile(database_config_path)
 
 # Initialize database and CSRF protection
 db = SQLAlchemy(app)
 csrf = CSRFProtect(app)
-
+migrate = Migrate(app, db)
 # Application routes
 @app.route('/')
 def home():
