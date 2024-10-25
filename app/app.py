@@ -27,19 +27,51 @@ def home():
     print("Available templates:", os.listdir(app.template_folder))
     return render_template('index.html')
 
+@app.route('/register')
+def register():
+    # Your registration logic here
+    return render_template('register.html')
+
+
 @app.route('/search')
 def search():
     # Train search logic (Rajeev Mishra)
     return render_template('search.html')
 
-@app.route('/login')
-def login():
+@app.route('/login', endpoint='login')  # Rename the endpoint to avoid conflicts
+def login_route():
+    # Login functionality here
     return render_template('login.html')
+
+@app.route('/forgot_password')
+def forgot_password():
+    # Login functionality here
+    return render_template('forgot_password.html')
 
 @app.route('/logout')
 def logout():
     # Logic for logging out a user
     return redirect(url_for('home'))
+
+@app.route('/contact_us')
+def contact_us():
+    return render_template('contact-us.html')
+
+@app.route('/booking')
+def booking():
+    # Your booking logic here
+    return render_template('booking.html')
+
+@app.route('/history')
+def history():
+    # Your history logic here
+    return render_template('history.html')
+
+@app.route('/dashboard')
+def dashboard():
+    # Your dashboard logic here
+    return render_template('dashboard.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
