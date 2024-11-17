@@ -2,7 +2,9 @@
 
 ## Project Overview
 
-**RailSaathi** is an AI-powered railway assistance system that simplifies ticket booking for the Indian Railways. It features user authentication, train search, real-time seat booking, and AI-driven suggestions. Built with Flask, MySQL, and JavaScript, this project aims to enhance user experience and streamline railway operations. Deployable on Heroku.
+**RailSaathi** is an AI-powered railway assistance system that simplifies ticket booking for the Indian Railways. It features user authentication, train search, real-time seat booking, and AI-driven suggestions. Built with Flask, MySQL, and JavaScript, this project aims to enhance user experience and streamline railway operations. Deployable on Heroku and Render.
+
+---
 
 ## Features
 
@@ -13,70 +15,151 @@
 - **User Dashboard**: Manage bookings and view travel history.
 - **Responsive Design**: Mobile-friendly interface for all devices.
 
+---
+
 ## Technologies Used
 
 - **Backend**: Flask (Python)
 - **Database**: MySQL with SQLAlchemy ORM
 - **Frontend**: HTML, CSS, JavaScript
 - **AI Model**: Machine learning algorithms for seat suggestions
-- **Deployment**: Heroku
+- **Deployment**: 
 
-### Python Version
+---
+
+## Python Version
+
 This project uses **Python 3.12.6**. Please ensure that you are using this version when setting up the project locally or when deploying it. The `runtime.txt` file in the project specifies this version for deployment on Render.
+
+---
 
 ## Getting Started
 
-1. Clone the repository:
+### Prerequisites
+
+- Python 3.12.6 installed
+- MySQL server installed
+- Git installed
+
+### Steps to Run Locally
+
+1. **Clone the repository**:
    ```bash
    git clone https://github.com/yourusername/RailSaathi.git
+   ```
 
-2. Change into Porject Directory:
+2. **Change into the project directory**:
    ```bash
    cd RailSaathi
+   ```
 
-3. Create a virtual environment and activate it:
-    ```bash
-    python3 -m venv venv
-    
-4. Avtivate the Python Virtual Environment:
-    ```bash
-    source venv/bin/activate  # On Windows use: venv\Scripts\activate
-    
-5. Install the required dependencies:
+3. **Create a virtual environment and activate it**:
+   ```bash
+   python3 -m venv venv
+   ```
+   - **On Windows**:
+     ```bash
+     venv\Scripts\activate
+     ```
+   - **On macOS/Linux**:
+     ```bash
+     source venv/bin/activate
+     ```
+
+4. **Install the required dependencies**:
    ```bash
    pip install -r requirements.txt
-   
-6. Set up the MySQL database using the provided SQL script:
-   ```bash
-   -- railsaathi.sql
-   
-7. Run the Flask application:
+   ```
+
+5. **Set up the database**:
+   - Import the provided SQL script to set up the database:
+     ```sql
+     railsaathi.sql
+     ```
+   - Update the `.env` file with your MySQL credentials:
+     ```plaintext
+     DB_URI=mysql+pymysql://root:password@localhost/railsathi
+     ```
+
+6. **Run the application**:
    ```bash
    python app.py
-   
-8. Access the application in your web browser at
-   ```bash
-   http://127.0.0.1:5000.
+   ```
+
+7. **Access the application**:
+   Open your browser and visit:
+   ```plaintext
+   http://127.0.0.1:5000
+   ```
+
+---
+
+## Deployment
+
+### Render
+
+1. Add a `.env` file with your environment variables:
+   ```plaintext
+   DB_URI=mysql+pymysql://root:password@localhost/railsathi
+   ```
+2. Update the `render.yaml` with necessary deployment configurations.
+3. Push the changes to your repository and link it with Render.
+
+### Heroku
+
+1. Create a Heroku application.
+2. Add your environment variables in the Heroku dashboard.
+3. Deploy using the Heroku CLI or GitHub integration.
+
+---
+
+## Environment Variables
+
+- Make sure `.env` is added to `.gitignore` for security.
+- Required variables:
+  - `DB_URI`: MySQL database connection string.
+
+---
+
+## File Structure Overview
+
+- **`app/`**: Contains all Python scripts and core logic.
+  - `ai_logic.py`: AI recommendation system logic.
+  - `auth.py`: User authentication.
+  - `bookings.py`: Booking management.
+  - `forms.py`: Web forms.
+  - `models.py`: Database models.
+  - `trains.py`: Train search and management.
+- **`static/`**: Static assets like CSS, JavaScript, and images.
+- **`templates/`**: HTML templates for rendering pages.
+- **`migrations/`**: Alembic migration files for database changes.
+
+---
 
 ## Future Work
-- Implement real-time train updates and notifications.
+
+- Real-time train updates and notifications.
 - Expand the AI model for personalized recommendations.
 - Add multi-language support.
-- Integrate third-party APIs for food ordering.
+- Integrate third-party APIs for food ordering and other services.
 
-# Team Members:
+---
+
+## Team Members
+
 - **Ayush Goel** - Backend, Database Integration, AI Logic, Deployment
 - **Meghna Singh** - Frontend UI/UX, CSS Design, Template Structure
 - **Rajeev Mishra** - Frontend JavaScript & Dynamic Features
 - **Azad Tiwari** - User Dashboard, Interactive Components
 
+---
+
 ## Contributing
+
 Contributions are welcome! Please open an issue or submit a pull request for any suggestions or improvements.
 
+---
+
 ## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-
-### Notes:
-- Make sure to replace `yourusername` with your actual GitHub username in the clone link.
-- You can add any additional sections or modify existing ones as per your project requirements!
