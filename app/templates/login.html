@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RailSaathi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+</head>
+<body>
+    <!-- <header style="position: fixed; top: 0; width: 100%; z-index: 1030;">
+    
+        <div class="main-logo" style="display: inline-block; vertical-align: middle;">
+            <img src="file.png" alt="website logo">
+        </div>
+
+        
+        <div class="main-head" style="display: inline-block; vertical-align: middle; padding-left: 20px;">
+            <h1>Book your dream journey with RailSaathi</h1>
+        </div>
+
+        <!
+        <div class="main-nav" style="display: inline-block; vertical-align: middle;" style="height: 100px;">
+            <nav class="navbar fixed-top bg-primary" style="background-color: transparent !important;">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation"
+                        style="background-color: whitesmoke; border-color: whitesmoke; margin: 20px 40px 20px 90%;">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel" style="background-color: #c5d7e7;">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><b>RailSaathi</b></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}"
+                                        style="font-weight: 600;">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('register') }}"
+                                        style="font-weight: 600;">Register</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('login') }}"
+                                        style="font-weight: 600;">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('contact_us') }}"
+                                        style="font-weight: 600;">Contact Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header> -->
+    <div class="container">
+        <h2>Login</h2>
+        <form action="verify-login.html" method="POST">
+            <label for="userId">User ID / Email / Phone:</label>
+            <input type="text" id="userId" name="userId" placeholder="Enter User ID, Email or Phone" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            
+            <button type="submit" style="margin-top: 10px;">Login</button>
+            
+            <div class="extra-options">
+                <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+                <a href="{{ url_for('register') }}">Register</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
