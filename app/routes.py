@@ -3,7 +3,7 @@ from flask import Blueprint, flash, render_template, redirect, request, url_for
 # Define blueprints for different sections
 home_bp = Blueprint('home', __name__,template_folder="templates")  # Explicit template folder
 
-@home_bp.route('/',method=['GET','POST'])
+@home_bp.route('/',methods=['GET','POST'])
 def home():
     print("Home route accessed")
     print("Template folder:", home_bp.template_folder)  # Debugging line
