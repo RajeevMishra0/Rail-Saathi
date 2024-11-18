@@ -1,1 +1,1 @@
-web: gunicorn app.app:app --workers 3
+web: python manage.py

@@ -1,61 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RailSaathi Registration</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RailSaathi</title>
+    <meta name="description"
+        content="RailSaathi - Your trusted companion for seamless train ticket booking and travel planning." />
+    <meta name="keywords" content="Railway, Train Booking, RailSaathi, Indian Railways, Train Routes" />
+    <meta name="author" content="RailSaathi Team" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}" />
 </head>
+
 <body>
-    <div class="container">
-        <div class="img-train">
-            <img src="{{ url_for('static', filename='images/train.jpg') }}" alt="train-bg-image">
+    <header>
+        <!-- 1: Logo Section -->
+        <div class="main-logo" style="display: inline-block; vertical-align: middle">
+            <img src="{{ url_for('static', filename='images/file.png') }}" alt="website logo" />
         </div>
-        <h2>Register - RailSaathi</h2>
-        <form action="submit-form.html" method="post">
-            <div class="form-group">
-                <label for="username">User Name:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
 
-            <div class="form-group">
-                <label for="fullname">Full Name:</label>
-                <input type="text" id="fullname" name="fullname" required>
-            </div>
+        <!-- 2: Headline Section -->
+        <div class="main-head">
+            <h1>Book your dream journey with RailSaathi</h1>
+        </div>
 
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="country_code">Country Code:</label>
-                <select id="country_code" name="country_code" required>
-                    <option value="+91">+91 - India</option>
-                    <option value="+1">+1 - United States</option>
-                    <option value="+44">+44 - United Kingdom</option>
-                    <!-- Add other country codes here -->
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="mobile">Mobile Number:</label>
-                <input type="tel" id="mobile" name="mobile" required>
-            </div>
-
-            <button type="submit">Register</button>
-        </form>
-    </div>
+        <!-- 3: Navigation Section -->
+        <div class="main-nav" style="display: inline-block; vertical-align: middle" style="height: 100px">
+            <nav class="navbar fixed-top navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-light" href="#"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation"
+                        style="
+                  background-color: whitesmoke;
+                  border-color: whitesmoke;
+                  margin: 20px 40px 20px 40px;
+                ">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel" style="background-color: #c5d7e7">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                                <b>RailSaathi</b>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                <li class="nav-item">
+                                    <a class="nav-link {% if active_page == 'home.home' %}active{% endif %}"
+                                        aria-current="page" href="{{ url_for('home.home') }}"
+                                        style="font-weight: 600">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {% if active_page == 'register.register' %}active{% endif %}"
+                                        href="{{ url_for('register.register') }}">Register</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {% if active_page == 'search.search' %}active{% endif %}"
+                                        href="{{ url_for('search.search') }}">Search Trains</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {% if active_page == 'login.login' %}active{% endif %}"
+                                        href="{{ url_for('login.login') }}">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {% if active_page == 'contact_us.contact_us' %}active{% endif %}"
+                                        href="{{ url_for('contact_us.contact_us') }}">Contact Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <form action="submit-form.html" method="post">
+        <h2 style="text-align: center">Register</h2>
+        <label for="username">User Name:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="fullname">Full Name:</label>
+        <input type="text" id="fullname" name="fullname" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="country_code">Country Code:</label>
+        <select id="country_code" name="country_code" required>
+            <option value="+91">+91 - India</option>
+            <option value="+1">+1 - United States</option>
+            <option value="+44">+44 - United Kingdom</option>
+            <!-- Add other country codes here -->
+        </select>
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile" required>
+        <button type="submit">Register</button>
+    </form>
+    <!-- <div class="hero-bg">
+        <img src="{{ url_for('static', filename='images/train.jpg') }}" alt="Scenic Train Route" />
+    </div> -->
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3">
+        <p>&copy; 2024 RailSaathi. All rights reserved.</p>
+        <p>Contact Us: support@railsaathi.com</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <div class="social-media">
+            <a href="https://facebook.com" target="_blank"><i class="bi bi-facebook"></i> Facebook</a>
+            <a href="https://twitter.com" target="_blank"><i class="bi bi-twitter"></i> Twitter</a>
+            <a href="https://instagram.com" target="_blank"><i class="bi bi-instagram"></i> Instagram</a>
+        </div>
+    </footer>
 </body>
+
 </html>

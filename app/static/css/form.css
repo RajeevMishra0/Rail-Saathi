@@ -1,88 +1,86 @@
 /* Reset some default styles */
-body, h1, h2, h3, h4, h5, h6, p, input, button {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  .img-train {
-    height: 100vh;
-  }
-  
-  /* General Styles */
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-    background-image: url('train.jpg'); /* Set your background image */
-    background-size: cover; /* Cover the entire background */
-    background-position: center; /* Center the background image */
-  }
-  
-  /* Container */
-  .container {
-    width: 90%;
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.8); /* Add transparency to the container */
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-  
-  /* Header */
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #4CAF50;
-  }
-  
-  /* Form styles */
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin: 10px 0 5px;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus,
-  select:focus {
-    border-color: #4CAF50;
-    outline: none;
-  }
-  
-  /* Button styles */
-  button {
-    padding: 10px;
-    background: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background: #45a049;
-  }
-  
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
+/* Container */
+/* .container{} */
+body{
+  background-image: url('../images/train.jpg');
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-size: cover; /* Make the image cover the entire screen */
+  background-attachment: fixed; /* Fix the background in place */
+  background-position: center; /* Center the image on the screen */
+  /* font-family: "Open Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+  min-height: 100vh;
+  /* margin: 0; */
+}
+/* Form styles */
+/* Form Container */
+form {
+  /* flex-grow: 1; Push the footer to the bottom when content is less
+  flex-direction: column; */
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  margin-top: 250px;
+  margin-bottom: 25px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9); /* Add transparency to the container */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus,
+input[type="tel"]:focus {
+  border-color: #ff9800;
+  outline: none;
+}
+
+/* Button styles */
+form button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  color: white;
+  background-color: #ff9800;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #e68900;
+  /* transform: scale(1.02); */
+}
+
+footer {
+  margin-top: 1rem; /*Push the footer to the bottom */
+  /* background-color: #1f4e79;
+  color: white;
+  padding: 1rem;
+  text-align: center; */
+}

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**RailSaathi** is an AI-powered railway assistance system that simplifies ticket booking for the Indian Railways. It features user authentication, train search, real-time seat booking, and AI-driven suggestions. Built with Flask, MySQL, and JavaScript, this project aims to enhance user experience and streamline railway operations. Deployable on Heroku and Render.
+**RailSaathi** is an AI-powered railway assistance system that simplifies ticket booking for the Indian Railways. It features user authentication, train search, real-time seat booking, and AI-driven suggestions. Built with Flask, MySQL, and JavaScript, this project aims to enhance user experience and streamline railway operations. Deployable on Render.
 
 ---
 
