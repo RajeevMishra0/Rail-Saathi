@@ -1,12 +1,33 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, flash, render_template, redirect, request, url_for
 
 # Define blueprints for different sections
 home_bp = Blueprint('home', __name__,template_folder="templates")  # Explicit template folder
 
-@home_bp.route('/')
+@home_bp.route('/',method=['GET','POST'])
 def home():
     print("Home route accessed")
     print("Template folder:", home_bp.template_folder)  # Debugging line
+    
+    if request.method == 'POST':
+        # Extract form data
+        departure_location = request.form.get('from')
+        destination = request.form.get('to')
+        travel_date = request.form.get('date')
+        travel_class = request.form.get('class')
+
+        # Validate form data
+        if not departure_location or not destination or not travel_date or travel_class == 'class':
+            flash('Please fill in all fields correctly.', 'danger')
+            return redirect(url_for('home.home'))
+
+        # Handle the form submission logic here (e.g., redirect to search results page)
+        return redirect(url_for('search.search', 
+                                from_station=departure_location, 
+                                to_station=destination, 
+                                date=travel_date, 
+                                travel_class=travel_class))
+
+    # Render the homepage
     return render_template('index.html',active_page='home.home')
 
 register_bp = Blueprint('register', __name__,template_folder="templates")
@@ -18,10 +39,51 @@ def register():
 
 search_bp = Blueprint('search', __name__,template_folder="templates")
 
-@search_bp.route('/search')
+@search_bp.route('/search', methods=['GET'])
 def search():
     # Train search logic
-    return render_template('search.html',active_page='search.search')
+    # Get query parameters
+    from_station = request.args.get('from_station')
+    to_station = request.args.get('to_station')
+    date = request.args.get('date')
+    travel_class = request.args.get('travel_class')
+
+    # Validate query parameters
+    if not from_station or not to_station or not date or not travel_class:
+        return render_template('error.html', message="Invalid search parameters.")
+
+    # Fetch search results (mock data here, replace with actual DB query or API call)
+    results = [
+        {
+            "train_name": "Rajdhani Express",
+            "train_number": "12345",
+            "departure_time": "08:00 AM",
+            "arrival_time": "04:00 PM",
+            "duration": "8h",
+            "available_seats": 50,
+            "travel_class": travel_class
+        },
+        {
+            "train_name": "Shatabdi Express",
+            "train_number": "54321",
+            "departure_time": "09:00 AM",
+            "arrival_time": "05:00 PM",
+            "duration": "8h",
+            "available_seats": 30,
+            "travel_class": travel_class
+        }
+    ]
+
+    # Filter results based on travel class if necessary (mock filtering shown)
+    filtered_results = [result for result in results if result['travel_class'] == travel_class]
+
+    # Render the search results page
+    return render_template('search.html', 
+                           from_station=from_station, 
+                           to_station=to_station, 
+                           date=date, 
+                           travel_class=travel_class, 
+                           results=filtered_results,active_page='search.search')
 
 login_bp = Blueprint('login', __name__,template_folder="templates")
 

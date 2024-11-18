@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Search Results</h1>
+    <p>From: {{ from_station }}</p>
+    <p>To: {{ to_station }}</p>
+    <p>Date: {{ date }}</p>
+    <p>Class: {{ travel_class }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Train Name</th>
+                <th>Train Number</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Duration</th>
+                <th>Available Seats</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.train_name }}</td>
+                <td>{{ result.train_number }}</td>
+                <td>{{ result.departure_time }}</td>
+                <td>{{ result.arrival_time }}</td>
+                <td>{{ result.duration }}</td>
+                <td>{{ result.available_seats }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
