@@ -39,7 +39,7 @@ def register():
 
 search_bp = Blueprint('search', __name__,template_folder="templates")
 
-@search_bp.route('/search', methods=['GET'])
+@search_bp.route('/search', methods=['GET','POST'])
 def search():
     # Train search logic
     # Get query parameters
