@@ -38,7 +38,7 @@ def home():
 
 register_bp = Blueprint('register', __name__,template_folder="templates")
 
-@register_bp.route('/register',methods='GET')
+@register_bp.route('/register')
 def register():
     # Registration logic
     return render_template('register.html',active_page='register.register')
