@@ -5,8 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 from flask_migrate import Migrate
 from dotenv import load_dotenv
-from app import db
-from app.models import SessionConfig, User  # Assuming User model is defined for user_id  # Assuming you have this model defined
+# from app import db
 
 # Load environment variables
 load_dotenv()
@@ -21,12 +20,18 @@ def set_session_variable(key, value):
     """Function to store session variables dynamically."""
     session[key] = value
     
-def get_session_variable(key, default=None):
+def get_session_variable(key, user_id=None, default=None):
     """Function to retrieve session variables."""
-    return session.get(key, default)
+    """Retrieve a session variable (only within request context)."""
+    from flask import has_request_context
+    if has_request_context():  # Check if a request context exists
+        return session.get(key, default)
+    return default # Fallback if not in request context
 
 def get_session_config(key, user_id=None, default=None):
     """Function to fetch session configurations from the database, linked to a user if specified."""
+    # Delayed import here
+    from app.models import SessionConfig #, User  # Assuming User model is defined for user_id  # Assuming you have this model defined
     if user_id:
         config = SessionConfig.query.filter_by(key=key, user_id=user_id).first()
     else:
@@ -38,6 +43,8 @@ def get_session_config(key, user_id=None, default=None):
 
 def set_session_config(key, value, user_id=None):
     """Function to store session configurations in the database, linked to a user if specified."""
+    # Delayed import here
+    from app.models import SessionConfig
     existing_config = SessionConfig.query.filter_by(key=key, user_id=user_id).first() if user_id else SessionConfig.query.filter_by(key=key).first()
     if existing_config:
         existing_config.value = value
@@ -55,24 +62,24 @@ def create_app():
     app = Flask(__name__, template_folder=os.path.join(basedir, 'templates'))
     
     # Get user_id from session if available
-    user_id = session.get('user_id', None)
+    # user_id = session.get('user_id', None)
 
     # Check if SECRET_KEY exists in the session or in the database; if not, set it dynamically
-    dynamic_secret_key = get_session_variable('SECRET_KEY', None)
-    # If no SECRET_KEY in session, try fetching from the database
-    if not dynamic_secret_key:
-        dynamic_secret_key = get_session_config('SECRET_KEY', user_id=session.get('user_id'), default=None)
+    # dynamic_secret_key = get_session_variable('SECRET_KEY', None)
+    # # If no SECRET_KEY in session, try fetching from the database
+    # if not dynamic_secret_key:
+    #     dynamic_secret_key = get_session_config('SECRET_KEY', user_id=session.get('user_id'), default=None)
          
-    # If SECRET_KEY doesn't exist in the session or DB, use a fallback and store it in the session and DB
-    if not dynamic_secret_key:    
-        dynamic_secret_key = os.getenv('SECRET_KEY', 'your_default_secret_key')
-        set_session_variable('SECRET_KEY', dynamic_secret_key)  # Store it in the session
-        set_session_config('SECRET_KEY', dynamic_secret_key, user_id=session.get('user_id'))  # Store in DB
+    # # If SECRET_KEY doesn't exist in the session or DB, use a fallback and store it in the session and DB
+    # if not dynamic_secret_key:    
+    #     dynamic_secret_key = os.getenv('SECRET_KEY', 'your_default_secret_key')
+    #     set_session_variable('SECRET_KEY', dynamic_secret_key)  # Store it in the session
+    #     set_session_config('SECRET_KEY', dynamic_secret_key, user_id=session.get('user_id'))  # Store in DB
         
     # App configurations
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', f"sqlite:///{os.path.join(basedir, 'railsaathi.db')}")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = dynamic_secret_key  # Use the dynamic SECRET_KEY for CSRF
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your_default_secret_key') #dynamic_secret_key  # Use the dynamic SECRET_KEY for CSRF
     
     # Enable CSRF protection
     app.config['WTF_CSRF_ENABLED'] = True  # CSRF protection enabled by default with Flask-WTF
@@ -96,7 +103,25 @@ def create_app():
         db.create_all()
         # Ensure migrations handle schema creation
         pass
+    
+    # Middleware to update session variables during requests
+    # Middleware for dynamic session and SECRET_KEY handling
+    @app.before_request
+    def load_dynamic_secret_key():
+        """Load dynamic configurations based on session."""
+        """Dynamically manage SECRET_KEY and session variables."""
+        if 'SECRET_KEY' not in session:
+            # Use database or fallback for SECRET_KEY
+            user_id = session.get('user_id', None)
+            session['SECRET_KEY'] = get_session_config('SECRET_KEY', user_id=user_id, default=app.config['SECRET_KEY'])
+            
+            if not dynamic_secret_key:
+                # Use fallback SECRET_KEY and store in session and DB
+                dynamic_secret_key = app.config['SECRET_KEY']
+                set_session_config('SECRET_KEY', dynamic_secret_key, user_id=user_id)
 
+            # Update session with the SECRET_KEY
+            session['SECRET_KEY'] = dynamic_secret_key
     return app
 
 # You can keep any other imports here if needed, but routes are now in app.pyQL
